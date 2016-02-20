@@ -16,9 +16,10 @@ def graph(n1, n2):
     R_s = abs(sin(a1 - a2)/sin(a1 + a2))**2
     R_p = abs(tan(a1 - a2)/tan(a1 + a2))**2
 
-    plt.plot(a1, R_s, "r")
-    plt.plot(a1, R_p, "b")
+    plt.plot(a1, R_s, "r", label="R_s")
+    plt.plot(a1, R_p, "b", label="R_p")
     plt.xlim(*xlimits)
+    plt.legend()
 
     #plt.axis().set_ticks(*xlimits)
 
