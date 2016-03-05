@@ -27,12 +27,12 @@ def plotf(R, n1, n2, r):
 
 def calc_f_paraxial(R, h, n1, n2):
     # b = R * n2 / (n2 - n1)
+    # return np.ones_like(h)*b
     a1 = h / R
     a2 = n1 / n2 * a1
     gamma = pi - (pi - a1) - a2
     f = a2 * R / gamma + R
     return f
-    # return np.ones_like(h)*b
 
 def calc_f(R, h, n1, n2):
     a1 = arcsin(h / R)
