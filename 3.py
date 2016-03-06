@@ -50,19 +50,20 @@ def fresnel(b, N, wavelength, x, l):
 
 def main():
     wavelength = 632e-9
-    N = 1000
+    N = 100
     b = 100e-6
-    L = [1, 0.1, 0.01, 0.001]
+    L = [1, 0.1, 0.005, 0.0025]
     x = [np.linspace(-0.02 * i, 0.02 * i, 1000) for i in L]
     frauns = [fraunhofer(b, wavelength, x[index], l) for index, l in enumerate(L)]
     fresnels = [fresnel(b, N, wavelength, x[index], l) for index, l in enumerate(L)]
     print([frauns[i] - fresnels[i] for i in range(4)])
 
+    plt.style.use('ggplot')
     for i, l in enumerate(L):
         plt.subplot(2, 2, i + 1)
-        plt.plot(x[i], frauns[i],label="fraunhofer", color="r")
-        plt.plot(x[i], fresnels[i], label="fresnel", color="b")
-        plt.title("l="+str(l))
+        plt.plot(x[i], frauns[i],label="fraunhofer")
+        plt.plot(x[i], fresnels[i], label="fresnel")
+        plt.title("l="+str(l)+" m")
         plt.xlabel("x")
         plt.ylabel("intensity")
         plt.axis([x[i][0], x[i][-1], 0, 1])

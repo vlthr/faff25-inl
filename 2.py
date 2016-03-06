@@ -12,7 +12,7 @@ def plotparaxial(R, n1, n2, r):
     xlimits = (-r, r)
     h = linspace(xlimits[0], xlimits[1], 1000)
     f = calc_f_paraxial(R, h, n1, n2)
-    plt.plot(h, f, "b", label="paraxial")
+    plt.plot(h, f, label="paraxial")
     plt.xlim(*xlimits)
     plt.legend()
 
@@ -21,11 +21,19 @@ def plotf(R, n1, n2, r):
     xlimits = (-r, r)
     h = linspace(xlimits[0], xlimits[1], 1000)
     f = calc_f(R, h, n1, n2)
-    plt.plot(h, f, "r", label="non-paraxial")
+    plt.plot(h, f,  label="non-paraxial")
     plt.xlim(*xlimits)
     plt.legend()
 
 def calc_f_paraxial(R, h, n1, n2):
+    """
+    Calculates the focal length for the given parameters. Assumes that sin(a) = a.
+    :param R: The radius of curvature for the lens
+    :param h: A numpy array of height values.
+    :param n1: The refractive index of the material surrounding the lens
+    :param n2: The refractive index of the lens material
+    :return: A numpy array of focal lengths, one for each of the heights in h
+    """
     # b = R * n2 / (n2 - n1)
     # return np.ones_like(h)*b
     a1 = h / R
@@ -35,6 +43,14 @@ def calc_f_paraxial(R, h, n1, n2):
     return f
 
 def calc_f(R, h, n1, n2):
+    """
+    Calculates the focal length for the given parameters.
+    :param R: The radius of curvature for the lens
+    :param h: A numpy array of height values.
+    :param n1: The refractive index of the material surrounding the lens
+    :param n2: The refractive index of the lens material
+    :return: A numpy array of focal lengths, one for each of the heights in h
+    """
     a1 = arcsin(h / R)
     a2 = arcsin(n1 / n2 * sin(a1))
     gamma = pi - (pi - a1) - a2
@@ -61,7 +77,7 @@ def calc_bk7(wavelength):
 def plot_chromatic(R, r, h, n1, wavelenghts, wavemin, wavemax):
     xlimits = (wavemin, wavemax)
     f = calc_f(R, h, n1, calc_bk7(wavelenghts))
-    plt.plot(wavelenghts, f, "r", label="f")
+    plt.plot(wavelenghts, f, label="f")
     plt.xlim(*xlimits)
     plt.title("2c) Chromatic aberration")
     plt.xlabel("wavelength (micrometers)")
@@ -72,6 +88,7 @@ def main():
     n2 = 1.5
     r = 0.05
     R = 0.15
+    plt.style.use('ggplot')
     plotf(R, n1, n2, r)
     plotparaxial(R, n1, n2, r)
     plt.title("2a) Paraxial Approximation")
