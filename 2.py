@@ -8,23 +8,6 @@ import matplotlib.pyplot as plt
 from math import pi
 
 
-def plotparaxial(R, n1, n2, r):
-    xlimits = (-r, r)
-    h = linspace(xlimits[0], xlimits[1], 1000)
-    f = calc_f_paraxial(R, h, n1, n2)
-    plt.plot(h, f, label="paraxial")
-    plt.xlim(*xlimits)
-    plt.legend()
-
-
-def plotf(R, n1, n2, r):
-    xlimits = (-r, r)
-    h = linspace(xlimits[0], xlimits[1], 1000)
-    f = calc_f(R, h, n1, n2)
-    plt.plot(h, f,  label="non-paraxial")
-    plt.xlim(*xlimits)
-    plt.legend()
-
 def calc_f_paraxial(R, h, n1, n2):
     """
     Calculates the focal length for the given parameters. Assumes that sin(a) = a.
@@ -34,8 +17,6 @@ def calc_f_paraxial(R, h, n1, n2):
     :param n2: The refractive index of the lens material
     :return: A numpy array of focal lengths, one for each of the heights in h
     """
-    # b = R * n2 / (n2 - n1)
-    # return np.ones_like(h)*b
     a1 = h / R
     a2 = n1 / n2 * a1
     gamma = pi - (pi - a1) - a2
@@ -83,6 +64,30 @@ def plot_chromatic(R, r, h, n1, wavelenghts, wavemin, wavemax):
     plt.xlabel("wavelength (micrometers)")
     plt.ylabel("f (m)")
 
+def plotparaxial(R, n1, n2, r):
+    xlimits = (-r, r)
+    h = linspace(xlimits[0], xlimits[1], 1000)
+    f = calc_f_paraxial(R, h, n1, n2)
+    plt.plot(h, f, label="paraxial")
+    plt.xlim(*xlimits)
+    plt.legend()
+
+
+def plotf(R, n1, n2, r):
+    xlimits = (-r, r)
+    h = linspace(xlimits[0], xlimits[1], 1000)
+    f = calc_f(R, h, n1, n2)
+    plt.plot(h, f,  label="non-paraxial")
+    plt.xlim(*xlimits)
+    plt.legend()
+
+def plot_bk7(wavelengths):
+    n = calc_bk7(wavelengths)
+    plt.plot(wavelengths, n)
+    plt.title("2b) BK7 glass")
+    plt.xlabel("wavelengths (micrometers)")
+    plt.ylabel("n")
+	
 def main():
     n1 = 1
     n2 = 1.5
@@ -105,12 +110,6 @@ def main():
     plt.show()
 
 
-def plot_bk7(wavelengths):
-    n = calc_bk7(wavelengths)
-    plt.plot(wavelengths, n)
-    plt.title("2b) BK7 glass")
-    plt.xlabel("wavelengths (micrometers)")
-    plt.ylabel("n")
 
 
 if __name__ == "__main__":

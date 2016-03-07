@@ -8,6 +8,10 @@ import matplotlib.pyplot as plt
 from math import pi
 
 def graph(n1, n2):
+	"""
+	Plots R_s and R_p as a function of the angle of incidence as light goes
+	from a material with refractive index n1, to one with refractive index n2
+	"""
     xlimits = (0, pi/2)
     a1 = linspace(xlimits[0], xlimits[1], 500)
     a2 = arcsin(n1/n2 * sin(a1))
