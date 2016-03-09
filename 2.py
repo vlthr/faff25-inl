@@ -1,10 +1,7 @@
 import typing
-
 import numpy as np
 from numpy import sin, tan, cos, arcsin, linspace
-
 import matplotlib.pyplot as plt
-
 from math import pi
 
 

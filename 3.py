@@ -1,11 +1,7 @@
 import typing
-
 import numpy as np
 from numpy import sin, tan, cos, arcsin, linspace
-from scipy.ndimage.interpolation import shift
-
 import matplotlib.pyplot as plt
-
 from math import pi
 
 
